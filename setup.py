@@ -4,29 +4,30 @@ import re
 
 from setuptools import find_packages
 from setuptools import setup
-import requirements
 from pathlib import Path
 
 
 def read(filename):
-    filename = os.path.join(os.path.dirname(__file__), filename)
+    file_path = Path(__file__).parent / filename
     text_type = type(u"")
-    with io.open(filename, mode="r", encoding='utf-8') as fd:
-        return re.sub(text_type(r':[a-z]+:`~?(.*?)`'), text_type(r'``\1``'), fd.read())
+    with open(file_path, mode="r", encoding="utf-8") as f:
+        return re.sub(text_type(r":[a-z]+:`~?(.*?)`"), text_type(r"``\1``"), f.read())
 
 
 def get_requires():
-    r_path = Path(__file__).parent / 'requirements.txt'
+    r_path = Path(__file__).parent / "requirements.txt"
     if r_path.exists():
-        reqs = list(requirements.parse(r_path.read_text()))
-        return [req.line for req in reqs]
+        with open(r_path) as f:
+            required = f.read().splitlines()
     else:
-        return []
+        required = []
+
+    return required
 
 
 setup(
     name="kanilist",
-    version="0.1.0",
+    version="0.1.3",
     url="https://github.com/fx-kirin/kanilist",
     license='MIT',
 

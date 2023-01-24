@@ -1,11 +1,11 @@
 """kanilist - """
 
-__version__ = '0.1.0'
+__version__ = '0.1.2'
 __author__ = 'fx-kirin <fx.kirin@gmail.com>'
-__all__ = ['get_attributes', 'get_diff', 'is_unique']
+__all__ = ['get_attribute', 'get_diff', 'is_unique']
 
 
-def get_attributes(list_: list, attribute: str):
+def get_attribute(list_: list, attribute: str):
     return [getattr(l, attribute) for l in list_]
 
 
